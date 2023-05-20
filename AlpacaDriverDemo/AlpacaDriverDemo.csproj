@@ -10,4 +10,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ASCOM.Alpaca.Razor" Version="0.3.2-alpha04" />
+  </ItemGroup>
+
 </Project>
