@@ -1,0 +1,9 @@
+﻿@page "/setup/v1/SafetyMonitor/{InstanceID:int}/setup"
+
+<h3>SafetySetup: @InstanceID</h3>
+
+@code {
+    [Parameter]
+    public int InstanceID { get; set; }
+
+}
