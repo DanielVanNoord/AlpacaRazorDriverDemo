@@ -17,6 +17,8 @@ namespace AlpacaDriverDemo
             ASCOM.Alpaca.Logging.AttachLogger(Logger);
             ASCOM.Alpaca.DeviceManager.LoadConfiguration(new AlpacaConfiguration());
 
+            ASCOM.Alpaca.DeviceManager.LoadSafetyMonitor(0, new Drivers.BasicMonitor(), "Really Basic Safety", "321654562163");
+
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
