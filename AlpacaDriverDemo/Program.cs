@@ -11,6 +11,7 @@ namespace AlpacaDriverDemo
         internal const string DriverID = "Alpaca.CustomDevice";
 
         //Change this to a unique value
+        //You should offer a way for the end user to customize this via the command line so it can be changed in the case of a collision.
         internal const int DefaultPort = 1234;
 
         //Fill these out
@@ -25,13 +26,17 @@ namespace AlpacaDriverDemo
 
             var builder = WebApplication.CreateBuilder(args);
 
+            //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
             ASCOM.Tools.ConsoleLogger Logger = new ASCOM.Tools.ConsoleLogger();
 
             //Attach the logger
             ASCOM.Alpaca.Logging.AttachLogger(Logger);
             ASCOM.Alpaca.DeviceManager.LoadConfiguration(new AlpacaConfiguration());
 
-            ASCOM.Alpaca.DeviceManager.LoadSafetyMonitor(0, new Drivers.BasicMonitor(), "Really Basic Safety", "321654562163");
+            //Add a safety monitor with device id 0. You can load any number of the same device with different ids or load other devices with Load* functions. 
+            //You may want to inject settings and logging here to the Driver Instance.
+            //For each device you add you should add a setting page to the settings folder and an entry in the Shared NavMenu
+            ASCOM.Alpaca.DeviceManager.LoadSafetyMonitor(0, new Drivers.BasicMonitor(), "Really Basic Safety Monitor", ServerSettings.GetDeviceUniqueId("SafetyMonitor", 0));
 
             // Add services to the container.
             builder.Services.AddRazorPages();

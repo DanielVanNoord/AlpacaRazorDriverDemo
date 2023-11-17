@@ -166,5 +166,22 @@ namespace AlpacaDriverDemo
                 Profile.WriteValue("RunInStrictAlpacaMode", value.ToString());
             }
         }
+
+        internal static string GetDeviceUniqueId(string DeviceType, int DeviceID)
+        {
+            string deviceKey = $"{DeviceType}-{DeviceID}";
+            if (Profile.ContainsKey(deviceKey))
+            {
+                return Profile.GetValue(deviceKey);
+            }
+            else
+            {
+                var NewGuid = Guid.NewGuid();
+
+                Profile.WriteValue(deviceKey, NewGuid.ToString());
+
+                return NewGuid.ToString();
+            }
+        }
     }
 }
