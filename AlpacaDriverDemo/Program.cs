@@ -7,8 +7,22 @@ namespace AlpacaDriverDemo
 {
     public class Program
     {
+        //Fill this with your driver name
+        internal const string DriverID = "Alpaca.CustomDevice";
+
+        //Change this to a unique value
+        internal const int DefaultPort = 1234;
+
+        //Fill these out
+        internal const string Manufacturer = "Your name here";
+        internal const string ServerName = "A friendly name for the server";
+        internal const string ServerVersion = "1.0";
+
+
         public static void Main(string[] args)
         {
+            //First fill in information for your driver in the Alpaca Configuration Class. Some of these you may want to store in a user changeable settings file.
+
             var builder = WebApplication.CreateBuilder(args);
 
             ASCOM.Tools.ConsoleLogger Logger = new ASCOM.Tools.ConsoleLogger();

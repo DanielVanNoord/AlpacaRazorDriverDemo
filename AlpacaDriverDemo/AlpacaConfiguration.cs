@@ -4,28 +4,28 @@ namespace AlpacaDriverDemo
 {
     internal class AlpacaConfiguration : IAlpacaConfiguration
     {
-        public bool RunInStrictAlpacaMode => true;
+        public bool RunInStrictAlpacaMode => ServerSettings.RunInStrictAlpacaMode;
 
-        public bool PreventRemoteDisconnects => true;
+        public bool PreventRemoteDisconnects => ServerSettings.PreventRemoteDisconnects;
 
-        public string ServerName => "Alpaca Demo";
+        public string ServerName => Program.ServerName;
 
-        public string Manufacturer => "Daniel";
+        public string Manufacturer => Program.Manufacturer;
 
-        public string ServerVersion => "0";
+        public string ServerVersion => Program.ServerVersion;
 
-        public string Location => "My House";
+        public string Location => ServerSettings.Location;
 
-        public bool AllowImageBytesDownload => true;
+        public bool AllowImageBytesDownload => ServerSettings.AllowImageBytesDownload;
 
-        public bool AllowDiscovery => true;
+        public bool AllowDiscovery => ServerSettings.AllowDiscovery;
 
-        public int ServerPort => 5077;
+        public int ServerPort => ServerSettings.ServerPort;
 
-        public bool AllowRemoteAccess => true;
+        public bool AllowRemoteAccess => ServerSettings.AllowRemoteAccess;
 
-        public bool LocalRespondOnlyToLocalHost => true;
+        public bool LocalRespondOnlyToLocalHost => ServerSettings.LocalRespondOnlyToLocalHost;
 
-        public bool RunSwagger => true;
+        public bool RunSwagger => ServerSettings.RunSwagger;
     }
 }
