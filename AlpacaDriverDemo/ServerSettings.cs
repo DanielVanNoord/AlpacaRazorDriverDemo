@@ -214,6 +214,23 @@ namespace AlpacaDriverDemo
             }
         }
 
+        internal static ASCOM.Common.Interfaces.LogLevel LoggingLevel
+        {
+            get
+            {
+                if (Enum.TryParse(Profile.GetValue("LoggingLevel", ASCOM.Common.Interfaces.LogLevel.Information.ToString()), out ASCOM.Common.Interfaces.LogLevel result))
+                {
+                    return result;
+                }
+                return ASCOM.Common.Interfaces.LogLevel.Information;
+            }
+            set
+            {
+                Program.Logger.SetMinimumLoggingLevel(value);
+                Profile.WriteValue("LoggingLevel", value.ToString());
+            }
+        }
+
         internal static string GetDeviceUniqueId(string DeviceType, int DeviceID)
         {
             string deviceKey = $"{DeviceType}-{DeviceID}";

@@ -62,3 +62,23 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+fieldset {
+    border: 3px solid #002157;
+    background: #eee;
+    border-radius: 5px;
+    padding: 3px;
+    width: 600px;
+    margin-bottom: 10px;
+}
+
+    fieldset legend {
+        background: #002157;
+        color: #fff;
+        padding: 3px 3px;
+        font-size: 18px;
+        box-shadow: 0 0 0 3px #000;
+        margin-left: 10px;
+        max-width: 22ch;
+    }

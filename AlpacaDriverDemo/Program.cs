@@ -1,5 +1,6 @@
 using ASCOM.Alpaca;
 using ASCOM.Common;
+using ASCOM.Common.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Diagnostics;
@@ -23,13 +24,17 @@ namespace AlpacaDriverDemo
         internal const string ServerName = "A friendly name for the server";
         internal const string ServerVersion = "1.0";
 
+        internal static ASCOM.Common.Interfaces.ILogger Logger;
+
+        internal static IHostApplicationLifetime Lifetime;
+
 
         public static void Main(string[] args)
         {
             //First fill in information for your driver in the Alpaca Configuration Class. Some of these you may want to store in a user changeable settings file.
 
             //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
-            ASCOM.Tools.ConsoleLogger Logger = new ASCOM.Tools.ConsoleLogger();
+            Logger = new ASCOM.Tools.ConsoleLogger();
 
             Logger.LogInformation($"{ServerName} version {ServerVersion}");
             Logger.LogInformation($"Running on: {RuntimeInformation.OSDescription}.");
@@ -194,6 +199,14 @@ namespace AlpacaDriverDemo
                     Logger.LogError(ex.Message);
                 }
             }
+
+            Lifetime = app.Lifetime;
+
+            //Put code here that should run at shutdown
+            Lifetime.ApplicationStopping.Register(() =>
+            {
+                Logger.LogInformation($"{ServerName} Stopping");
+            });
 
             app.Run();
         }
