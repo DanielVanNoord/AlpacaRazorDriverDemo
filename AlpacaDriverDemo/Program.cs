@@ -2,6 +2,8 @@ using ASCOM.Alpaca;
 using ASCOM.Common;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Diagnostics;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -31,6 +33,39 @@ namespace AlpacaDriverDemo
 
             Logger.LogInformation($"{ServerName} version {ServerVersion}");
             Logger.LogInformation($"Running on: {RuntimeInformation.OSDescription}.");
+
+
+            //If already running start browser
+            try
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    //Already running, start the browser, detects based on port in use
+                    var con1 = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections().Where(con => con.LocalEndPoint.Port == ServerSettings.ServerPort);
+                    if (IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections().Any(con => con.LocalEndPoint.Port == ServerSettings.ServerPort && (con.State == TcpState.Listen || con.State == TcpState.Established)))
+                    {
+                        Logger.LogInformation("Detected driver port already open, starting web browser on IP and Port. If this fails something else is using the port");
+                        StartBrowser(ServerSettings.ServerPort);
+                        return;
+                    }
+                }
+                else
+                {
+                    //This was working fine for .Net Core 3.1. Initial tests for .Net 5 show a change in how single file deployments work on Linux
+                    //This should probably be changed to a Mutex or another similar lock
+                    if (System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1)
+                    {
+                        Logger.LogInformation("Detected driver already running, starting web browser on IP and Port");
+                        StartBrowser(ServerSettings.ServerPort);
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.Message);
+                return;
+            }
 
             //Reset all stored settings if requested
             if (args?.Any(str => str.Contains("--reset")) ?? false)
@@ -95,6 +130,8 @@ namespace AlpacaDriverDemo
 
             //Attach the logger
             ASCOM.Alpaca.Logging.AttachLogger(Logger);
+
+            //Load the configuration
             ASCOM.Alpaca.DeviceManager.LoadConfiguration(new AlpacaConfiguration());
 
             //Add a safety monitor with device id 0. You can load any number of the same device with different ids or load other devices with Load* functions. 
@@ -146,7 +183,33 @@ namespace AlpacaDriverDemo
 
             app.MapFallbackToPage("/_Host");
 
+            if(ServerSettings.AutoStartBrowser)
+            {
+                try
+                {
+                    StartBrowser(ServerSettings.ServerPort);
+                }
+                catch(Exception ex) 
+                {
+                    Logger.LogError(ex.Message);
+                }
+            }
+
             app.Run();
+        }
+
+        /// <summary>
+        /// Starts the system default handler (normally a browser) for local host and the current port.
+        /// </summary>
+        /// <param name="port"></param>
+        internal static void StartBrowser(int port)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = string.Format("http://localhost:{0}", port),
+                UseShellExecute = true
+            };
+            Process.Start(psi);
         }
     }
 }
