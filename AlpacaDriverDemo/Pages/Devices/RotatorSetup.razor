@@ -1,0 +1,20 @@
+﻿@page "/setup/v1/Rotator/{InstanceID:int}/setup"
+
+<h3>Rotator Setup: @InstanceID</h3>
+
+@if (ASCOM.Alpaca.DeviceManager.rotatorV3s.ContainsKey(InstanceID))
+{
+    <p>Add your device setup and control functions here</p>
+
+}
+else
+{
+    <h3>This device does not exist and cannot be configured</h3>
+}
+
+
+@code {
+    [Parameter]
+    public int InstanceID { get; set; }
+
+}
