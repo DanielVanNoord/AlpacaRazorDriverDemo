@@ -1,7 +1,9 @@
 using ASCOM.Alpaca;
+using ASCOM.Common;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace AlpacaDriverDemo
 {
@@ -24,10 +26,72 @@ namespace AlpacaDriverDemo
         {
             //First fill in information for your driver in the Alpaca Configuration Class. Some of these you may want to store in a user changeable settings file.
 
-            var builder = WebApplication.CreateBuilder(args);
-
             //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
             ASCOM.Tools.ConsoleLogger Logger = new ASCOM.Tools.ConsoleLogger();
+
+            Logger.LogInformation($"{ServerName} version {ServerVersion}");
+            Logger.LogInformation($"Running on: {RuntimeInformation.OSDescription}.");
+
+            //Reset all stored settings if requested
+            if (args?.Any(str => str.Contains("--reset")) ?? false)
+            {
+                Logger.LogInformation("Reseting Settings");
+                ServerSettings.Reset();
+
+                //If you have any device settings you should reset them as well or add a specific reset command.
+
+                return;
+            }
+
+
+            //Turn off Authentication. Once off the user can change the password and re-enable authentication
+            if (args?.Any(str => str.Contains("--reset-auth")) ?? false)
+            {
+                Logger.LogInformation("Turning off Authentication to allow password reset.");
+                ServerSettings.UseAuth = false;
+                Logger.LogInformation("Authentication off, you can change the password and then re-enable Authentication.");
+            }
+
+            if (args?.Any(str => str.Contains("--local-address")) ?? false)
+            {
+                Console.WriteLine($"http://localhost:{ServerSettings.ServerPort}");
+            }
+
+            if (!args?.Any(str => str.Contains("--urls")) ?? true)
+            {
+                if (args == null)
+                {
+                    args = new string[0];
+                }
+
+                Logger.LogInformation("No startup url args detected, binding to saved server settings.");
+
+                var temparray = new string[args.Length + 1];
+
+                args.CopyTo(temparray, 0);
+
+                string startupURLArg = "--urls=http://";
+
+                //If set to allow remote access bind to all local ips, otherwise bind only to localhost
+                if (ServerSettings.AllowRemoteAccess)
+                {
+                    startupURLArg += "*";
+                }
+                else
+                {
+                    startupURLArg += "localhost";
+                }
+
+                startupURLArg += ":" + ServerSettings.ServerPort;
+
+                Logger.LogInformation("Startup URL args: " + startupURLArg);
+
+                temparray[args.Length] = startupURLArg;
+
+                args = temparray;
+            }
+
+            var builder = WebApplication.CreateBuilder(args);
 
             //Attach the logger
             ASCOM.Alpaca.Logging.AttachLogger(Logger);

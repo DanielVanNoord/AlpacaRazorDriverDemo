@@ -1,5 +1,7 @@
-﻿using ASCOM.Common.Interfaces;
+﻿using ASCOM.Alpaca;
+using ASCOM.Common.Interfaces;
 using ASCOM.Tools;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -10,6 +12,11 @@ namespace AlpacaDriverDemo
     {
         //This is a shared profile that is used to store server settings.
         internal static ASCOM.Tools.XMLProfile Profile = new ASCOM.Tools.XMLProfile(Program.DriverID, "Server");
+
+        internal static void Reset()
+        {
+            Profile.Clear();
+        }
 
         internal static string Location
         {
@@ -164,6 +171,46 @@ namespace AlpacaDriverDemo
             set
             {
                 Profile.WriteValue("RunInStrictAlpacaMode", value.ToString());
+            }
+        }
+
+        internal static bool UseAuth
+        {
+            get
+            {
+                if (bool.TryParse(Profile.GetValue("UseAuth", false.ToString()), out bool result))
+                {
+                    return result;
+                }
+                return false;
+            }
+            set
+            {
+                Profile.WriteValue("UseAuth", value.ToString());
+            }
+        }
+
+        internal static string UserName
+        {
+            get
+            {
+                return Profile.GetValue("UserName", "User");
+            }
+            set
+            {
+                Profile.WriteValue("UserName", value.ToString());
+            }
+        }
+
+        internal static string Password
+        {
+            get
+            {
+                return Profile.GetValue("Password");
+            }
+            set
+            {
+                Profile.WriteValue("Password", Hash.GetStoragePassword(value));
             }
         }
 

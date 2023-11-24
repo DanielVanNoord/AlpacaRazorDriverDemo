@@ -4,11 +4,26 @@ namespace AlpacaDriverDemo
 {
     internal class UserService : IUserService
     {
-        public bool UseAuth => false;
-
         public async Task<bool> Authenticate(string username, string password)
         {
-            return await Task.Run(() => true);
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    return username == ServerSettings.UserName && Hash.Validate(ServerSettings.Password, password);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            );
+        }
+
+        public bool UseAuth
+        {
+            get => ServerSettings.UseAuth;
         }
     }
 }
