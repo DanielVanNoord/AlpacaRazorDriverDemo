@@ -17,92 +17,92 @@
         @foreach (var device in ASCOM.Alpaca.DeviceManager.cameraV3s)
         {
             string path = $"/setup/v1/Camera/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-camera-slr" aria-hidden="true"></span> Camera - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.coverCalibratorV1s)
         {
             string path = $"/setup/v1/covercalibrator/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-contrast" aria-hidden="true"></span> CoverCalibrator - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.domeV2s)
         {
             string path = $"/setup/v1/dome/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-aperture" aria-hidden="true"></span> Dome - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.filterWheelV2s)
         {
             string path = $"/setup/v1/filterwheel/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-sun" aria-hidden="true"></span> Filter Wheel - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.focuserV3s)
         {
             string path = $"/setup/v1/focuser/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-elevator" aria-hidden="true"></span> Focuser - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.observingConditions)
         {
             string path = $"/setup/v1/observingconditions/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-cloudy" aria-hidden="true"></span> ObservingConditions - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.rotatorV3s)
         {
             string path = $"/setup/v1/rotator/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-loop-circular" aria-hidden="true"></span> Rotator - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.safetyMonitors)
         {
             string path = $"/setup/v1/SafetyMonitor/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-ban" aria-hidden="true"></span> SafetyMonitor - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.switchV2s)
         {
             string path = $"/setup/v1/switch/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-circle-check" aria-hidden="true"></span> Switch - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         @foreach (var device in ASCOM.Alpaca.DeviceManager.telescopeV3s)
         {
             string path = $"/setup/v1/telescope/{device.Key}/setup";
-            <li class="nav-item px-3">
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-star" aria-hidden="true"></span> Telescope - @device.Key
                 </NavLink>
-            </li>
+            </div>
         }
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="/setup" Match="NavLinkMatch.All">
