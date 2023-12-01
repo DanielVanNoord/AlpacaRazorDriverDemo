@@ -195,7 +195,7 @@ namespace AlpacaDriverDemo
                 }
                 catch(Exception ex) 
                 {
-                    Logger.LogError(ex.Message);
+                    Logger.LogWarning(ex.Message);
                 }
             }
 
