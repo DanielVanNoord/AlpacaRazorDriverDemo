@@ -12,11 +12,13 @@ namespace AlpacaDriverDemo
 {
     public class Program
     {
+        //ToDo
         //Fill this with your driver name
         internal const string DriverID = "Alpaca.CustomDevice";
 
         //Change this to a unique value
         //You should offer a way for the end user to customize this via the command line so it can be changed in the case of a collision.
+        //This supports --urls=http://*:port by default.
         internal const int DefaultPort = 1234;
 
         //Fill these out
@@ -32,10 +34,14 @@ namespace AlpacaDriverDemo
         public static void Main(string[] args)
         {
             //First fill in information for your driver in the Alpaca Configuration Class. Some of these you may want to store in a user changeable settings file.
+            //The fill in the ToDos in this file. Each is marked with a //ToDo
+            //You shouldn't need to do anything in the Startup and Logging or Finish Building and Start Server regions
 
             //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
             Logger = new ASCOM.Tools.ConsoleLogger();
 
+
+            #region Startup and Logging
             Logger.LogInformation($"{ServerName} version {ServerVersion}");
             Logger.LogInformation($"Running on: {RuntimeInformation.OSDescription}.");
 
@@ -132,6 +138,10 @@ namespace AlpacaDriverDemo
 
             var builder = WebApplication.CreateBuilder(args);
 
+            #endregion
+
+            //ToDo you can add devices here
+
             //Attach the logger
             ASCOM.Alpaca.Logging.AttachLogger(Logger);
 
@@ -142,6 +152,8 @@ namespace AlpacaDriverDemo
             //You may want to inject settings and logging here to the Driver Instance.
             //For each device you add you should add a setting page to the settings folder and an entry in the Shared NavMenu
             ASCOM.Alpaca.DeviceManager.LoadSafetyMonitor(0, new Drivers.BasicMonitor(), "Really Basic Safety Monitor", ServerSettings.GetDeviceUniqueId("SafetyMonitor", 0));
+
+            #region Finish Building and Start server
 
             // Add services to the container.
             builder.Services.AddRazorPages();
@@ -199,15 +211,20 @@ namespace AlpacaDriverDemo
                 }
             }
 
+            #endregion
+
             Lifetime = app.Lifetime;
 
-            //Put code here that should run at shutdown
+            //ToDo Put code here that should run at shutdown
             Lifetime.ApplicationStopping.Register(() =>
             {
                 Logger.LogInformation($"{ServerName} Stopping");
             });
 
+            //Start the Alpaca Server
             app.Run();
+
+
         }
 
         /// <summary>
