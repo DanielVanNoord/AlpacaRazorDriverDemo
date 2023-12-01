@@ -1,5 +1,11 @@
 # AlpacaDriverDemo
 
+This is a basic Alpaca Driver Template built using .Net with a Blazor UI. It uses the same API Library that the OmniSim does.
+
+This is a work in progress. The eventual deliverables are a git template and a .Net new template. For now this works well enough to build drivers but there may be breaking changes.
+
+This requires .Net 6-8 on a Linux, Windows or macOS system to build.
+
 ## Getting Started
 
 Fill out the constants in program.cs with your details and default ports.
