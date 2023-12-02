@@ -14,7 +14,7 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.cameraV3s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.Cameras)
         {
             string path = $"/setup/v1/Camera/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -23,7 +23,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.coverCalibratorV1s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.CoverCalibrators)
         {
             string path = $"/setup/v1/covercalibrator/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -32,7 +32,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.domeV2s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.Domes)
         {
             string path = $"/setup/v1/dome/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -41,7 +41,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.filterWheelV2s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.FilterWheels)
         {
             string path = $"/setup/v1/filterwheel/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -50,7 +50,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.focuserV3s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.Focusers)
         {
             string path = $"/setup/v1/focuser/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -59,16 +59,16 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.observingConditions)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.ObservingConditions)
         {
-            string path = $"/setup/v1/observingconditions/{device.Key}/setup";
+            string path = $"/setup/v1/ObservingConditions/{device.Key}/setup";
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="@path" Match="NavLinkMatch.All">
                     <span class="oi oi-cloudy" aria-hidden="true"></span> ObservingConditions - @device.Key
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.rotatorV3s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.Rotators)
         {
             string path = $"/setup/v1/rotator/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -77,7 +77,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.safetyMonitors)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.SafetyMonitors)
         {
             string path = $"/setup/v1/SafetyMonitor/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -86,7 +86,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.switchV2s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.Switches)
         {
             string path = $"/setup/v1/switch/{device.Key}/setup";
             <div class="nav-item px-3">
@@ -95,7 +95,7 @@
                 </NavLink>
             </div>
         }
-        @foreach (var device in ASCOM.Alpaca.DeviceManager.telescopeV3s)
+        @foreach (var device in ASCOM.Alpaca.DeviceManager.Telescopes)
         {
             string path = $"/setup/v1/telescope/{device.Key}/setup";
             <div class="nav-item px-3">
