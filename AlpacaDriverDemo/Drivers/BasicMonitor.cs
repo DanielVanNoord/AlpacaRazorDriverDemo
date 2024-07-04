@@ -2,7 +2,7 @@
 
 namespace AlpacaDriverDemo.Drivers
 {
-    public class BasicMonitor : ISafetyMonitor
+    public class BasicMonitor : ISafetyMonitorV3
     {
         public bool IsSafe
         {
@@ -30,7 +30,11 @@ namespace AlpacaDriverDemo.Drivers
 
         public IList<string> SupportedActions => new List<string>();
 
-        public string Action(string ActionName, string ActionParameters)
+		public bool Connecting => throw new NotImplementedException();
+
+		public List<StateValue> DeviceState => throw new NotImplementedException();
+
+		public string Action(string ActionName, string ActionParameters)
         {
             throw new ASCOM.NotImplementedException();
         }
@@ -50,7 +54,17 @@ namespace AlpacaDriverDemo.Drivers
             throw new ASCOM.NotImplementedException();
         }
 
-        public void Dispose()
+		public void Connect()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Disconnect()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Dispose()
         {
             throw new ASCOM.NotImplementedException();
         }

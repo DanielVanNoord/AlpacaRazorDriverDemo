@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ASCOM.Alpaca.Razor" Version="0.4.0-alpha02" />
+    <PackageReference Include="ASCOM.Alpaca.Razor" Version="0.4.0-alpha03" />
   </ItemGroup>
 
 </Project>

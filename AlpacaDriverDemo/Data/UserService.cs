@@ -2,8 +2,8 @@
 
 namespace AlpacaDriverDemo
 {
-    internal class UserService : IUserService
-    {
+    internal class UserService : ASCOM.Alpaca.IUserService
+	{
         public async Task<bool> Authenticate(string username, string password)
         {
             return await Task.Run(() =>
