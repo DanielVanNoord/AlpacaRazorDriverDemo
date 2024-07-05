@@ -34,7 +34,7 @@ namespace AlpacaDriverDemo
         public static void Main(string[] args)
         {
             //First fill in information for your driver in the Alpaca Configuration Class. Some of these you may want to store in a user changeable settings file.
-            //The fill in the ToDos in this file. Each is marked with a //ToDo
+            //Then fill in the ToDos in this file. Each is marked with a //ToDo
             //You shouldn't need to do anything in the Startup and Logging or Finish Building and Start Server regions
 
             //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
