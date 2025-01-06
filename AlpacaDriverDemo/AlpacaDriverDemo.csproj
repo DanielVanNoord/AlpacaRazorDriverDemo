@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ASCOM.Alpaca.Razor" Version="0.4.0-alpha03" />
+    <PackageReference Include="ASCOM.Alpaca.Razor" Version="0.4.1-rc.1" />
   </ItemGroup>
 
 </Project>
