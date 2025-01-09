@@ -4,7 +4,7 @@ This is a basic Alpaca Driver Template built using .Net with a Blazor UI. It use
 
 This is a work in progress. The eventual deliverables are a git template and a .Net new template. For now this works well enough to build drivers but there may be breaking changes.
 
-This requires .Net 6-8 on a Linux, Windows or macOS system to build.
+This requires .Net 8+ on a Linux, Windows or macOS system to build.
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ Test your driver with ConformU.
 
 ## Requirements
 
-* .Net 6-8
+* .Net 8+
 
 ## Resources
 
