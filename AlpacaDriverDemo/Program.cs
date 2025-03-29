@@ -1,8 +1,5 @@
 using ASCOM.Alpaca;
 using ASCOM.Common;
-using ASCOM.Common.Interfaces;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Reflection;
@@ -19,17 +16,17 @@ namespace AlpacaDriverDemo
         //Change this to a unique value
         //You should offer a way for the end user to customize this via the command line so it can be changed in the case of a collision.
         //This supports --urls=http://*:port by default.
-        internal const int DefaultPort = 1234;
+        internal const int DefaultPort = 31234;
 
         //Fill these out
         internal const string Manufacturer = "Your name here";
+
         internal const string ServerName = "A friendly name for the server";
         internal const string ServerVersion = "1.0";
 
-        internal static ASCOM.Common.Interfaces.ILogger Logger;
+        internal static ASCOM.Common.Interfaces.ILogger? Logger;
 
-        internal static IHostApplicationLifetime Lifetime;
-
+        internal static IHostApplicationLifetime? Lifetime;
 
         public static void Main(string[] args)
         {
@@ -40,11 +37,10 @@ namespace AlpacaDriverDemo
             //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
             Logger = new ASCOM.Tools.ConsoleLogger();
 
-
             #region Startup and Logging
+
             Logger.LogInformation($"{ServerName} version {ServerVersion}");
             Logger.LogInformation($"Running on: {RuntimeInformation.OSDescription}.");
-
 
             //If already running start browser
             try
@@ -62,12 +58,15 @@ namespace AlpacaDriverDemo
                 }
                 else
                 {
-                    //This may need to be changed to a global lock of some sort.
-                    if (System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1)
+                    Assembly? entryAssembly = Assembly.GetEntryAssembly();
+                    if (entryAssembly != null)
                     {
-                        Logger.LogInformation("Detected driver already running, starting web browser on IP and Port");
-                        StartBrowser(ServerSettings.ServerPort);
-                        return;
+                        if(Process.GetProcessesByName(entryAssembly.Location).Length > 1)
+                        {
+                            Logger.LogInformation("Detected driver already running, starting web browser on IP and Port");
+                            StartBrowser(ServerSettings.ServerPort);
+                            return;
+                        }
                     }
                 }
             }
@@ -88,7 +87,6 @@ namespace AlpacaDriverDemo
                 return;
             }
 
-
             //Turn off Authentication. Once off the user can change the password and re-enable authentication
             if (args?.Any(str => str.Contains("--reset-auth")) ?? false)
             {
@@ -104,10 +102,7 @@ namespace AlpacaDriverDemo
 
             if (!args?.Any(str => str.Contains("--urls")) ?? true)
             {
-                if (args == null)
-                {
-                    args = new string[0];
-                }
+                args ??= [];
 
                 Logger.LogInformation("No startup url args detected, binding to saved server settings.");
 
@@ -136,9 +131,9 @@ namespace AlpacaDriverDemo
                 args = temparray;
             }
 
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args ?? []);
 
-            #endregion
+            #endregion Startup and Logging
 
             //ToDo you can add devices here
 
@@ -148,7 +143,7 @@ namespace AlpacaDriverDemo
             //Load the configuration
             ASCOM.Alpaca.DeviceManager.LoadConfiguration(new AlpacaConfiguration());
 
-            //Add a safety monitor with device id 0. You can load any number of the same device with different ids or load other devices with Load* functions. 
+            //Add a safety monitor with device id 0. You can load any number of the same device with different ids or load other devices with Load* functions.
             //You may want to inject settings and logging here to the Driver Instance.
             //For each device you add you should add a setting page to the settings folder and an entry in the Shared NavMenu
             ASCOM.Alpaca.DeviceManager.LoadSafetyMonitor(0, new Drivers.BasicMonitor(), "Really Basic Safety Monitor", ServerSettings.GetDeviceUniqueId("SafetyMonitor", 0));
@@ -170,7 +165,7 @@ namespace AlpacaDriverDemo
             //Use Authentication
             ASCOM.Alpaca.Razor.StartupHelpers.ConfigureAuthentication(builder.Services);
             //Add User Service
-            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserService, Data.UserService>();
 
             var app = builder.Build();
 
@@ -199,19 +194,19 @@ namespace AlpacaDriverDemo
 
             app.MapFallbackToPage("/_Host");
 
-            if(ServerSettings.AutoStartBrowser)
+            if (ServerSettings.AutoStartBrowser)
             {
                 try
                 {
                     StartBrowser(ServerSettings.ServerPort);
                 }
-                catch(Exception ex) 
+                catch (Exception ex)
                 {
                     Logger.LogWarning(ex.Message);
                 }
             }
 
-            #endregion
+            #endregion Finish Building and Start server
 
             Lifetime = app.Lifetime;
 
@@ -223,8 +218,6 @@ namespace AlpacaDriverDemo
 
             //Start the Alpaca Server
             app.Run();
-
-
         }
 
         /// <summary>

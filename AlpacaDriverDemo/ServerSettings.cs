@@ -1,10 +1,4 @@
 ﻿using ASCOM.Alpaca;
-using ASCOM.Common.Interfaces;
-using ASCOM.Tools;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace AlpacaDriverDemo
 {
@@ -226,7 +220,7 @@ namespace AlpacaDriverDemo
             }
             set
             {
-                Program.Logger.SetMinimumLoggingLevel(value);
+                Program.Logger?.SetMinimumLoggingLevel(value);
                 Profile.WriteValue("LoggingLevel", value.ToString());
             }
         }

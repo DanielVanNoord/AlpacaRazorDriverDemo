@@ -1,6 +1,6 @@
 ﻿using ASCOM.Alpaca;
 
-namespace AlpacaDriverDemo
+namespace AlpacaDriverDemo.Data
 {
     internal class UserService : ASCOM.Alpaca.IUserService
 	{

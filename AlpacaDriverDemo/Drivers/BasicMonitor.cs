@@ -28,7 +28,7 @@ namespace AlpacaDriverDemo.Drivers
 
         public string Name => "Safety Monitor";
 
-        public IList<string> SupportedActions => new List<string>();
+        public IList<string> SupportedActions => [];
 
 		public bool Connecting => throw new NotImplementedException();
 

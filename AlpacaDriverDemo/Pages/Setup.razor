@@ -36,7 +36,7 @@
     <br />
 
     <button @onclick="SaveServerSettings" style="min-width:12ch; vertical-align:middle;">Save</button>
-           
+
 </fieldset>
 
 <fieldset>
@@ -168,7 +168,7 @@
     <br />
     <span>Shutdown:</span>
     <input type="checkbox"
-           @bind="EnableShutdown">
+    @bind="EnableShutdown">
     <button @onclick="Shutdown" style="min-width:12ch; vertical-align:middle;" disabled="@AllowShutdown">Shutdown</button>
 </fieldset>
 
@@ -261,13 +261,13 @@
     {
         get;
         set;
-    }
+    } = string.Empty;
 
     string Password2
     {
         get;
         set;
-    }
+    } = string.Empty;
 
     bool RunSwagger
     {
@@ -319,7 +319,7 @@
 
             if (SettingsChanged) //If any core settings change call a restart.
             {
-                Program.Main(null);
+                Program.Main(Array.Empty<string>());
             }
 
         }
@@ -417,7 +417,7 @@
     {
         try
         {
-            Program.Lifetime.StopApplication();
+            Program.Lifetime?.StopApplication();
         }
         catch (Exception ex)
         {
