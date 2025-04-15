@@ -37,6 +37,8 @@ namespace AlpacaDriverDemo
             //For Debug ConsoleLogger is very nice. For production TraceLogger is recommended.
             Logger = new ASCOM.Tools.ConsoleLogger();
 
+            //This region contains startup and logging features, most of the time you shouldn't need to customize this
+            //You can add custom Command Line arguments here
             #region Startup and Logging
 
             Logger.LogInformation($"{ServerName} version {ServerVersion}");
