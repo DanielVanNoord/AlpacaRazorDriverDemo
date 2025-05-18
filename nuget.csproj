@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.0</PackageVersion>
     <PackageId>ASCOM.Alpaca.Templates</PackageId>
     <Title>ASCOM Alpaca .Net Template</Title>
     <Authors>Daniel Van Noord</Authors>
