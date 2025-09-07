@@ -1,6 +1,6 @@
 ﻿using ASCOM.Common.DeviceInterfaces;
 
-namespace AlpacaDriverDemo.Drivers
+namespace AlpacaDriverDemo.DeviceAccess
 {
     public class BasicMonitor : ISafetyMonitorV3
     {
