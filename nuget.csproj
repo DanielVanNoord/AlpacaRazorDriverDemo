@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
@@ -8,16 +8,26 @@
     <Description>Template to use when creating an ASCOM Alpaca C# Driver using Blazor, Razor and ASP.Net Core.</Description>
     <PackageTags>dotnet-new;templates;ASCOM;alpaca</PackageTags>
     <TargetFramework>net8.0</TargetFramework>
-	<IsPackable>true</IsPackable>
-    <IncludeContentInPack>true</IncludeContentInPack>
+    <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>content</ContentTargetFolders>
-	<EnableDefaultItems>false</EnableDefaultItems>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.5.0-alpha04</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="AlpacaDriverDemo\**" Exclude="AlpacaDriverDemo\bin\**;AlpacaDriverDemo\obj\**" />
-    <Compile Remove="**\*" />
+    <None Include="AlpacaDriverDemo\**"
+          Exclude="AlpacaDriverDemo\bin\**;
+                 AlpacaDriverDemo\obj\**"
+          Pack="true"
+          PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="AlpacaDriverDemo\*.nuspec" />
+    <None Remove="AlpacaDriverDemo\[Content_Types\].xml" />
+    <None Remove="AlpacaDriverDemo\_rels\**" />
+    <None Remove="AlpacaDriverDemo\package\**" />
   </ItemGroup>
 
 </Project>
