@@ -21,13 +21,8 @@
                  AlpacaDriverDemo\obj\**"
           Pack="true"
           PackagePath="" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="AlpacaDriverDemo\*.nuspec" />
-    <None Remove="AlpacaDriverDemo\[Content_Types\].xml" />
-    <None Remove="AlpacaDriverDemo\_rels\**" />
-    <None Remove="AlpacaDriverDemo\package\**" />
+    <None Update="AlpacaDriverDemo\CustomisationHelp\CSharpAlpacaTemplate.docx"
+          Pack="false" />
   </ItemGroup>
 
 </Project>

@@ -38,4 +38,22 @@
   "guids": [
     "E8C48796-D4D6-44F0-B3BA-22ECF47B918D"
   ],
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/*.nuspec",
+        "**/_rels/**",
+        "**/*Content_Types*.xml",
+        "**/package/**"
+      ]
+    }
+  ],
 }
