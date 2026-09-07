@@ -10,6 +10,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <EnableDefaultItems>false</EnableDefaultItems>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.5.0-alpha04</Version>
