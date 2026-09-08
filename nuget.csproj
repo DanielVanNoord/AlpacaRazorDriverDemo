@@ -17,13 +17,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="AlpacaDriverDemo\**"
-          Exclude="AlpacaDriverDemo\bin\**;
-                 AlpacaDriverDemo\obj\**"
-          Pack="true"
+    <None Include="AlpacaDriverDemo\**" 
+          Exclude="AlpacaDriverDemo\bin\**; AlpacaDriverDemo\obj\**" 
+          Pack="true" 
           PackagePath="" />
-    <None Update="AlpacaDriverDemo\CustomisationHelp\CSharpAlpacaTemplate.docx"
-          Pack="false" />
+    
+    <None Update="AlpacaDriverDemo\CustomisationHelp\CSharpAlpacaTemplate.docx" Pack="false" />
   </ItemGroup>
 
 </Project>
