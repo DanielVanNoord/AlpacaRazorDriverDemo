@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AlpacaDriverDemo.DeviceAccess
 {
+    /// <summary>
+    /// This class implements the ISafetyMonitorV3 interface and provides basic functionality for connecting, disconnecting, and monitoring the safety state of the device.
+    /// </summary>
     public class BasicMonitor : ISafetyMonitorV3
     {
 

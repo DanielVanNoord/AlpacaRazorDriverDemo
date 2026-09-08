@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 
 namespace AlpacaDriverDemo
 {
+    /// <summary>
+    /// This class holds the main entry point for the application.
+    /// </summary>
     public class Program
     {
         //ToDo
@@ -28,6 +31,10 @@ namespace AlpacaDriverDemo
 
         internal static IHostApplicationLifetime? Lifetime;
 
+        /// <summary>
+        /// The main entry point for the application. It sets up logging, configuration, and starts the web server.
+        /// </summary>
+        /// <param name="args">Command line arguments</param>
         public static void Main(string[] args)
         {
             //First fill in information for your driver in the Alpaca Configuration Class. Some of these you may want to store in a user changeable settings file.
